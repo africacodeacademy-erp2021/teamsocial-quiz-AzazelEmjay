@@ -1,0 +1,47 @@
+body {
+  background-color: #466299;
+  font-size: medium;
+
+}
+h1{
+  font-size: 40px;
+}
+
+input{
+  font-size: 30px;
+}
+
+.answer-section{
+  font-size: 30px;
+}
+
+.question-text{
+  font-size: 20px;  
+}
+
+.question-section{
+  font-size: 20px; 
+}
+p{
+  font-size: 30px;
+}
+
+form {
+font-size: 30px;
+
+}
+.header{
+  text-align: center;
+  color:rgb(107, 20, 179);
+}
+
+.answer-section {
+width: 100%;
+display:  flex;
+flex-direction: column;
+justify-content: space-between;
+}
+
+button{
+  font-size: 20px;
+}
