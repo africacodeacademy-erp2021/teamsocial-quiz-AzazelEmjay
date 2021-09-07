@@ -3,8 +3,7 @@ import React, { useState } from "react";
 export default function Movies() {
   const questions = [
     {
-      questionText:
-        "Who says this line in Avengers EndGame, 'You could not live with your own failure, could you..'",
+      questionText:"Who says this line in Avengers EndGame, 'You could not live with your own failure, could you..'",
       answerOptions: [
         { answerText: "Stephen Strange", isCorrect: false },
         { answerText: "He Who Remains", isCorrect: false },
@@ -12,6 +11,7 @@ export default function Movies() {
         { answerText: "Nick Fury", isCorrect: false },
       ],
     },
+        
     {
       questionText: "Who was the true villain in Zack Snyder's Justice League?",
       answerOptions: [
@@ -44,8 +44,7 @@ export default function Movies() {
       ],
     },
     {
-      questionText:
-        "Which of these Marvels movies is not set to be released in 2021?",
+      questionText: "Which of these Marvels movies is not set to be released in 2021?",
       answerOptions: [
         { answerText: "Eternals", isCorrect: false },
         { answerText: "Spider-man: No Way Home", isCorrect: false },
@@ -53,6 +52,52 @@ export default function Movies() {
         { answerText: "Dr. Strange: Multitude Of Madness", isCorrect: true },
       ],
     },
+     
+    {
+      questionText: "Who plays Peter Quill in Guardians Of The Galaxy?",
+      answerOptions: [
+        { answerText: "Dave Bautista", isCorrect: false },
+        { answerText: "Chris Evans", isCorrect: false },
+        { answerText: "Chris Hemsworth", isCorrect: false },
+        { answerText: "Chris Pratt", isCorrect: true },
+      ],
+    },
+    
+    {
+      questionText: "Who plays Peter Quill in Guardians Of The Galaxy?",
+      answerOptions: [
+        { answerText: "Dave Bautista", isCorrect: false },
+        { answerText: "Chris Evans", isCorrect: false },
+        { answerText: "Chris Hemsworth", isCorrect: false },
+        { answerText: "Chris Pratt", isCorrect: true },
+      ],
+    },
+    {
+      questionText: "Red Skull Guards the soul stone in Avengers Infinity War",
+      answerOptions: [
+        { answerText: "True", isCorrect: true },
+      
+        { answerText: "False", isCorrect:  false},
+      ],
+    },
+    {
+      questionText: "Tony Stark said the line, 'You're not the only one cursed with knowledge'",
+      answerOptions: [
+        { answerText: "True", isCorrect: false },
+      
+        { answerText: "False", isCorrect: true},
+      ],
+    },
+    {
+      questionText: "Tom Holland's first appearance in Marvel as spiderman was in Captain America Civil War ",
+      answerOptions: [
+        { answerText: "True", isCorrect: true },
+      
+        { answerText: "False", isCorrect: false},
+      ],
+    },
+    
+
   ];
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [showScore, setShowScore] = useState(false);
