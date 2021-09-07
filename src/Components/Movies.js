@@ -70,7 +70,7 @@ export default function Movies() {
       setShowScore(true);
     }
   };
-  const data = JSON.stringify(localStorage.getItem("user"));
+  const data = JSON.stringify(localStorage.getItem("name"));
   const name = data.replace('"','');
   const username = name.replace('"','');
 
@@ -81,14 +81,14 @@ export default function Movies() {
       <div className="app">
         {showScore ? (
           <div className="score-section">
-            {data} You scored {score} out of {questions.length}
+            {username} You scored {score} out of {questions.length}
           </div>
         ) : (
           <>
             <div className="question-section">
               <div className="question-count">
                 <span>Question {currentQuestion + 1}</span>
-                {questions.length}
+                
               </div>
               <div className="question-text">
                 {questions[currentQuestion].questionText}

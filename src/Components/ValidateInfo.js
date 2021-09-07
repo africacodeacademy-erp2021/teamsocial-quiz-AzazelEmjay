@@ -3,8 +3,8 @@ export default function ValidateInfo(values) {
 
   if (!values.username.trim()) {
     errors.username = "Username required";
-  } else if (values.username.length < 5) {
-    errors.username = "Username should be 5 characters or more";
+  } else if (values.username.length < 3) {
+    errors.username = "Username should be 3 characters or more";
   } else if (values.username.length > 20) {
     errors.username = "Username should be not be more 20 characters long";
   }

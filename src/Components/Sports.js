@@ -65,7 +65,7 @@ export default function Sports() {
       setShowScore(true);
     }
   };
-  const data = JSON.stringify(localStorage.getItem("user"));
+  const data = JSON.stringify(localStorage.getItem("name"));
   const name = data.replace('"','');
   const username = name.replace('"','');
 
@@ -83,7 +83,7 @@ export default function Sports() {
             <div className="question-section">
               <div className="question-count">
                 <span>Question {currentQuestion + 1}</span>
-                {questions.length}
+                 
               </div>
               <div className="question-text">
                 {questions[currentQuestion].questionText}

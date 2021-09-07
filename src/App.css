@@ -1,5 +1,5 @@
 body {
-  background-color: #466299;
+  background-color: #990bbd;
   font-size: medium;
 
 }
@@ -8,11 +8,11 @@ h1{
 }
 
 input{
-  font-size: 30px;
+  font-size: 20px;
 }
 
 .answer-section{
-  font-size: 30px;
+  font-size: 20px;
 }
 
 .question-text{
@@ -23,16 +23,16 @@ input{
   font-size: 20px; 
 }
 p{
-  font-size: 30px;
+  font-size: 20px;
 }
 
 form {
-font-size: 30px;
+font-size: 20px;
 
 }
 .header{
   text-align: center;
-  color:rgb(107, 20, 179);
+  color:rgb(10, 9, 10);
 }
 
 .answer-section {
