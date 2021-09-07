@@ -48,6 +48,50 @@ export default function Sports() {
         { answerText: "4", isCorrect: true },
       ],
     },
+    {
+      questionText: "Who had started the International Women’s Boxing Hall of Fame?",
+      answerOptions: [
+        { answerText: "Terri Moss", isCorrect: false },
+        { answerText: "Sue TL Fox", isCorrect: true },
+        { answerText: "Claressa Shields", isCorrect: false },
+        { answerText: "Barbara Buttrick", isCorrect:false },
+      ],
+    },
+    {
+      questionText: "Which among the following is known as 'Bible of Cricket'?",
+      answerOptions: [
+        { answerText: "All Out Cricket", isCorrect: false },
+        { answerText: "Cricinfo Magazine", isCorrect: false },
+        { answerText: "Wisden", isCorrect: true },
+        { answerText: "The Guide to Cricketers", isCorrect:false },
+      ],
+    },
+    {
+      questionText: "Which country has won the maximum number of medals in the all time history of Commonwealth Games?",
+      answerOptions: [
+        { answerText: "Australia", isCorrect: true  },
+        { answerText: "England", isCorrect: false },
+        { answerText: "India", isCorrect: false },
+        { answerText: "Canada", isCorrect: false},
+      ],
+    },
+    {
+      questionText: "There are 30 balls in the game of snooker.",
+      answerOptions: [
+       
+        { answerText: "True", isCorrect: false },
+        { answerText: "False", isCorrect: true },
+      ],
+    },
+    {
+      questionText: "There has never been a woman chess master.",
+      answerOptions: [
+       
+        { answerText: "True", isCorrect: false },
+        { answerText: "False", isCorrect: true },
+      ],
+    },
+  
   ];
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [showScore, setShowScore] = useState(false);
