@@ -3,8 +3,7 @@ import React, { useState } from "react";
 export default function Movies() {
   const questions = [
     {
-      questionText:
-        "Who says this line in Avengers EndGame, 'You could not live with your own failure, could you..'",
+      questionText: "Who says this line in Avengers EndGame, 'You could not live with your own failure, could you..'",
       answerOptions: [
         { answerText: "Stephen Strange", isCorrect: false },
         { answerText: "He Who Remains", isCorrect: false },
@@ -12,6 +11,7 @@ export default function Movies() {
         { answerText: "Nick Fury", isCorrect: false },
       ],
     },
+     
 
     {
       questionText: "Who was the true villain in Zack Snyder's Justice League?",
@@ -45,8 +45,7 @@ export default function Movies() {
       ],
     },
     {
-      questionText:
-        "Which of these Marvels movies is not set to be released in 2021?",
+      questionText:  "Which of these Marvels movies is not set to be released in 2021?",
       answerOptions: [
         { answerText: "Eternals", isCorrect: false },
         { answerText: "Spider-man: No Way Home", isCorrect: false },
@@ -54,6 +53,7 @@ export default function Movies() {
         { answerText: "Dr. Strange: Multitude Of Madness", isCorrect: true },
       ],
     },
+      
 
     {
       questionText: "Who plays Peter Quill in Guardians Of The Galaxy?",
@@ -82,23 +82,22 @@ export default function Movies() {
       ],
     },
     {
-      questionText:
-        "Tony Stark said the line, 'You're not the only one cursed with knowledge'",
+      questionText:"Tony Stark said the line, 'You're not the only one cursed with knowledge'",
       answerOptions: [
         { answerText: "True", isCorrect: false },
         { answerText: "False", isCorrect: true },
       ],
     },
+     
     {
-      questionText:
-        "Tom Holland's first appearance in Marvel as spiderman was in Captain America Civil War ",
+      questionText: "Tom Holland's first appearance in Marvel as spiderman was in Captain America Civil War ",
       answerOptions: [
         { answerText: "True", isCorrect: true },
         { answerText: "False", isCorrect: false },
       ],
     },
+     
   ];
-  var randomQuestions = questions[Math.floor(Math.random() * questions.length)];
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [showScore, setShowScore] = useState(false);
   const [score, setScore] = useState(0);
@@ -107,10 +106,10 @@ export default function Movies() {
       setScore(score + 1);
     }
 
-    randomQuestions = currentQuestion + 1;
+    const nextQuestions = currentQuestion + 1;
 
-    if (randomQuestions < questions.length) {
-      setCurrentQuestion(randomQuestions);
+    if (nextQuestions < questions.length) {
+      setCurrentQuestion(nextQuestions);
     } else {
       setShowScore(true);
     }
