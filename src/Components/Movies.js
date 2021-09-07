@@ -3,7 +3,8 @@ import React, { useState } from "react";
 export default function Movies() {
   const questions = [
     {
-      questionText:"Who says this line in Avengers EndGame, 'You could not live with your own failure, could you..'",
+      questionText:
+        "Who says this line in Avengers EndGame, 'You could not live with your own failure, could you..'",
       answerOptions: [
         { answerText: "Stephen Strange", isCorrect: false },
         { answerText: "He Who Remains", isCorrect: false },
@@ -11,7 +12,7 @@ export default function Movies() {
         { answerText: "Nick Fury", isCorrect: false },
       ],
     },
-        
+
     {
       questionText: "Who was the true villain in Zack Snyder's Justice League?",
       answerOptions: [
@@ -44,7 +45,8 @@ export default function Movies() {
       ],
     },
     {
-      questionText: "Which of these Marvels movies is not set to be released in 2021?",
+      questionText:
+        "Which of these Marvels movies is not set to be released in 2021?",
       answerOptions: [
         { answerText: "Eternals", isCorrect: false },
         { answerText: "Spider-man: No Way Home", isCorrect: false },
@@ -52,7 +54,7 @@ export default function Movies() {
         { answerText: "Dr. Strange: Multitude Of Madness", isCorrect: true },
       ],
     },
-     
+
     {
       questionText: "Who plays Peter Quill in Guardians Of The Galaxy?",
       answerOptions: [
@@ -62,43 +64,41 @@ export default function Movies() {
         { answerText: "Chris Pratt", isCorrect: true },
       ],
     },
-    
+
     {
-      questionText: "Who plays Peter Quill in Guardians Of The Galaxy?",
+      questionText: "Who is the actor behind Groot from the guardians of the galaxy?",
       answerOptions: [
-        { answerText: "Dave Bautista", isCorrect: false },
-        { answerText: "Chris Evans", isCorrect: false },
-        { answerText: "Chris Hemsworth", isCorrect: false },
-        { answerText: "Chris Pratt", isCorrect: true },
+        { answerText: "Sylvester Stallone", isCorrect: false },
+        { answerText: "Dwayne Johnson", isCorrect: false },
+        { answerText: "Morgan Freeman", isCorrect: false },
+        { answerText: "Vin Diesel", isCorrect: true },
       ],
     },
     {
       questionText: "Red Skull Guards the soul stone in Avengers Infinity War",
       answerOptions: [
         { answerText: "True", isCorrect: true },
-      
-        { answerText: "False", isCorrect:  false},
+        { answerText: "False", isCorrect: false },
       ],
     },
     {
-      questionText: "Tony Stark said the line, 'You're not the only one cursed with knowledge'",
+      questionText:
+        "Tony Stark said the line, 'You're not the only one cursed with knowledge'",
       answerOptions: [
         { answerText: "True", isCorrect: false },
-      
-        { answerText: "False", isCorrect: true},
+        { answerText: "False", isCorrect: true },
       ],
     },
     {
-      questionText: "Tom Holland's first appearance in Marvel as spiderman was in Captain America Civil War ",
+      questionText:
+        "Tom Holland's first appearance in Marvel as spiderman was in Captain America Civil War ",
       answerOptions: [
         { answerText: "True", isCorrect: true },
-      
-        { answerText: "False", isCorrect: false},
+        { answerText: "False", isCorrect: false },
       ],
     },
-    
-
   ];
+  var randomQuestions = questions[Math.floor(Math.random() * questions.length)];
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [showScore, setShowScore] = useState(false);
   const [score, setScore] = useState(0);
@@ -107,17 +107,17 @@ export default function Movies() {
       setScore(score + 1);
     }
 
-    const nextQuestions = currentQuestion + 1;
+    randomQuestions = currentQuestion + 1;
 
-    if (nextQuestions < questions.length) {
-      setCurrentQuestion(nextQuestions);
+    if (randomQuestions < questions.length) {
+      setCurrentQuestion(randomQuestions);
     } else {
       setShowScore(true);
     }
   };
   const data = JSON.stringify(localStorage.getItem("name"));
-  const name = data.replace('"','');
-  const username = name.replace('"','');
+  const name = data.replace('"', "");
+  const username = name.replace('"', "");
 
   return (
     <>
@@ -133,7 +133,6 @@ export default function Movies() {
             <div className="question-section">
               <div className="question-count">
                 <span>Question {currentQuestion + 1}</span>
-                
               </div>
               <div className="question-text">
                 {questions[currentQuestion].questionText}
