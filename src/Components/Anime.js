@@ -84,6 +84,15 @@ export default function Anime() {
         { answerText: "Grey Fullbuster", isCorrect: false },
       ],
     },
+    {
+      questionText: "Tensa Zangetsu is the name of Ichigo's Bankai",
+      answerOptions: [
+        { answerText: "True", isCorrect: true },
+        { answerText: "False", isCorrect: false },
+        
+      ],
+    },
+    
   ];
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [showScore, setShowScore] = useState(false);
