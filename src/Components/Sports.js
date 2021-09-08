@@ -93,6 +93,7 @@ export default function Sports() {
     },
   
   ];
+  var randomIndex = Math.floor(Math.random()* questions.length);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [showScore, setShowScore] = useState(false);
   const [score, setScore] = useState(0);
@@ -130,12 +131,12 @@ export default function Sports() {
                  
               </div>
               <div className="question-text">
-                {questions[currentQuestion].questionText}
+                {questions[randomIndex].questionText}
               </div>
             </div>
 
             <div className="answer-section">
-              {questions[currentQuestion].answerOptions.map((answerOptions) => (
+              {questions[randomIndex].answerOptions.map((answerOptions) => (
                 <button
                   onClick={() =>
                     handleAnswerButtonClick(answerOptions.isCorrect)
