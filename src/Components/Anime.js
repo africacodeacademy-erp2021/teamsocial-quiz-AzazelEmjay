@@ -105,8 +105,8 @@ export default function Anime() {
     }
 
     const nextQuestions = currentQuestion + 1;
-    const length = 7;
-    if (nextQuestions < length) {
+    
+    if (nextQuestions < questions.length) {
       setCurrentQuestion(nextQuestions);
     } else {
       setShowScore(true);
@@ -119,14 +119,15 @@ export default function Anime() {
   return (
     <>
       <h1 className="header">Anime Quiz</h1>
-      <p>Player Name: {username}</p>
+      
       <div className="app">
         {showScore ? (
           <div className="score-section">
-            {username} You scored {score} out of 7
+           <p> {username} You scored {score} out of {questions.length}</p>
           </div>
         ) : (
           <>
+          <p>Player Name: {username}</p>
             <div className="question-section">
               <div className="question-count">
                 <span>Question {currentQuestion + 1}</span>
@@ -147,6 +148,8 @@ export default function Anime() {
                   {answerOptions.answerText}
                 </button>
               ))}
+              <br/>
+              Your score is {score}
             </div>
           </>
         )}

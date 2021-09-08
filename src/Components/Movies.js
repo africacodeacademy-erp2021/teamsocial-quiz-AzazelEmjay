@@ -99,6 +99,7 @@ export default function Movies() {
      
   ];
   var randomIndex = Math.floor(Math.random()* questions.length);
+  
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [showScore, setShowScore] = useState(false);
   const [score, setScore] = useState(0);
@@ -122,14 +123,17 @@ export default function Movies() {
   return (
     <>
       <h1 className="header">Movies Quiz</h1>
-      <p>Player Name: {username}</p>
+      
       <div className="app">
         {showScore ? (
           <div className="score-section">
-            {username} You scored {score} out of {questions.length}
+            <p>{username} You scored {score} out of {questions.length} </p><br/>
+            <button>Restart Game</button><br/>
+            <button>Choose a different Category</button>
           </div>
         ) : (
           <>
+          <p>Player Name: {username}</p>
             <div className="question-section">
               <div className="question-count">
                 <span>Question {currentQuestion + 1}</span>
@@ -149,6 +153,8 @@ export default function Movies() {
                   {answerOptions.answerText}
                 </button>
               ))}
+              <br/>
+              Your score is {score}
             </div>
           </>
         )}

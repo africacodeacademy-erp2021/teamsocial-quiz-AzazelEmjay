@@ -117,14 +117,15 @@ export default function Sports() {
   return (
     <>
       <h1 className="header">Sports Quiz</h1>
-      <p>Player Name: {username}</p>
+      
       <div className="app">
         {showScore ? (
           <div className="score-section">
-            {username} You scored {score} out of {questions.length}
+           <p> {username} You scored {score} out of {questions.length}</p>
           </div>
         ) : (
           <>
+          <p>Player Name: {username}</p>
             <div className="question-section">
               <div className="question-count">
                 <span>Question {currentQuestion + 1}</span>
@@ -144,7 +145,10 @@ export default function Sports() {
                 >
                   {answerOptions.answerText}
                 </button>
+  
               ))}
+              <br/>
+              Your score is {score}
             </div>
           </>
         )}
