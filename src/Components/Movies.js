@@ -3,7 +3,8 @@ import React, { useState } from "react";
 export default function Movies() {
   const questions = [
     {
-      questionText: "Who says this line in Avengers EndGame, 'You could not live with your own failure, could you..'",
+      questionText:
+        "Who says this line in Avengers EndGame, 'You could not live with your own failure, could you..'",
       answerOptions: [
         { answerText: "Stephen Strange", isCorrect: false },
         { answerText: "He Who Remains", isCorrect: false },
@@ -11,7 +12,6 @@ export default function Movies() {
         { answerText: "Nick Fury", isCorrect: false },
       ],
     },
-     
 
     {
       questionText: "Who was the true villain in Zack Snyder's Justice League?",
@@ -45,7 +45,8 @@ export default function Movies() {
       ],
     },
     {
-      questionText:  "Which of these Marvels movies is not set to be released in 2021?",
+      questionText:
+        "Which of these Marvels movies is not set to be released in 2021?",
       answerOptions: [
         { answerText: "Eternals", isCorrect: false },
         { answerText: "Spider-man: No Way Home", isCorrect: false },
@@ -53,7 +54,6 @@ export default function Movies() {
         { answerText: "Dr. Strange: Multitude Of Madness", isCorrect: true },
       ],
     },
-      
 
     {
       questionText: "Who plays Peter Quill in Guardians Of The Galaxy?",
@@ -66,7 +66,8 @@ export default function Movies() {
     },
 
     {
-      questionText: "Who is the actor behind Groot from the guardians of the galaxy?",
+      questionText:
+        "Who is the actor behind Groot from the guardians of the galaxy?",
       answerOptions: [
         { answerText: "Sylvester Stallone", isCorrect: false },
         { answerText: "Dwayne Johnson", isCorrect: false },
@@ -82,27 +83,41 @@ export default function Movies() {
       ],
     },
     {
-      questionText:"Tony Stark said the line, 'You're not the only one cursed with knowledge'",
+      questionText:
+        "Tony Stark said the line, 'You're not the only one cursed with knowledge'",
       answerOptions: [
         { answerText: "True", isCorrect: false },
         { answerText: "False", isCorrect: true },
       ],
     },
-     
+
     {
-      questionText: "Tom Holland's first appearance in Marvel as spiderman was in Captain America Civil War ",
+      questionText:
+        "Tom Holland's first appearance in Marvel as spiderman was in Captain America Civil War ",
       answerOptions: [
         { answerText: "True", isCorrect: true },
         { answerText: "False", isCorrect: false },
       ],
     },
-     
   ];
-  var randomIndex = Math.floor(Math.random()* questions.length);
-  
+
+  const questionSet = [...new Set(questions)];
+
+  var randomIndex = Math.floor(Math.random() * questionSet.length);
+
+  const [option, setOption] = useState();
+  const [questionLength, setQuestionLength] = useState(0);
+  function optionChange(event) {
+    setOption(event.target.value);
+    setQuestionLength(event.target.value);
+
+    return questionLength;
+  }
+
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [showScore, setShowScore] = useState(false);
   const [score, setScore] = useState(0);
+
   const handleAnswerButtonClick = (isCorrect) => {
     if (isCorrect === true) {
       setScore(score + 1);
@@ -110,12 +125,13 @@ export default function Movies() {
 
     const nextQuestions = currentQuestion + 1;
 
-    if (nextQuestions < questions.length) {
+    if (nextQuestions < questionLength) {
       setCurrentQuestion(nextQuestions);
     } else {
       setShowScore(true);
     }
   };
+  
   const data = JSON.stringify(localStorage.getItem("name"));
   const name = data.replace('"', "");
   const username = name.replace('"', "");
@@ -123,23 +139,36 @@ export default function Movies() {
   return (
     <>
       <h1 className="header">Movies Quiz</h1>
-      
+
       <div className="app">
         {showScore ? (
           <div className="score-section">
-            <p>{username} You scored {score} out of {questions.length} </p><br/>
-            <button>Restart Game</button><br/>
+            <p>
+              {username} You scored {score} out of {questionLength}{" "}
+            </p>
+            <br />
+            <button>Restart Game</button>
+            <br />
             <button>Choose a different Category</button>
           </div>
         ) : (
           <>
-          <p>Player Name: {username}</p>
+            <div className="answers">
+              <p>Select the number of questions for Your game</p>
+              <select name="option" onChange={optionChange}>
+                <option value="10">All questions</option>
+                <option value="5" >5</option>
+                <option value="7" >7</option>
+              </select>
+            </div>
+            <p>Player Name: {username}</p>
             <div className="question-section">
               <div className="question-count">
                 <span>Question {currentQuestion + 1}</span>
               </div>
               <div className="question-text">
                 {questions[randomIndex].questionText}
+                
               </div>
             </div>
 
@@ -153,7 +182,7 @@ export default function Movies() {
                   {answerOptions.answerText}
                 </button>
               ))}
-              <br/>
+              <br />
               Your score is {score}
             </div>
           </>

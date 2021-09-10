@@ -93,6 +93,14 @@ export default function Sports() {
     },
   
   ];
+  const [option, setOption] = useState();
+  const [questionLength, setQuestionLength] = useState(0);
+  function optionChange(event) {
+    setOption(event.target.value);
+    setQuestionLength(event.target.value);
+
+    return questionLength;
+  }
   var randomIndex = Math.floor(Math.random()* questions.length);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [showScore, setShowScore] = useState(false);
@@ -104,7 +112,7 @@ export default function Sports() {
 
     const nextQuestions = currentQuestion + 1;
 
-    if (nextQuestions < questions.length) {
+    if (nextQuestions < questionLength) {
       setCurrentQuestion(nextQuestions);
     } else {
       setShowScore(true);
@@ -121,10 +129,18 @@ export default function Sports() {
       <div className="app">
         {showScore ? (
           <div className="score-section">
-           <p> {username} You scored {score} out of {questions.length}</p>
+           <p> {username} You scored {score} out of {questionLength}</p>
           </div>
         ) : (
           <>
+          <div className="answers">
+              <p>Select the number of questions for Your game</p>
+              <select name="option" onChange={optionChange}>
+                <option value="10">All questions</option>
+                <option value="5">5</option>
+                <option value="7">7</option>
+              </select>
+            </div>
           <p>Player Name: {username}</p>
             <div className="question-section">
               <div className="question-count">
