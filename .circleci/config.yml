@@ -5,6 +5,8 @@ orbs:
   node: circleci/node@4.1
   heroku: circleci/heroku@1.0.1
   
+jobs:
+ 
   build:
     executor: node/default
     steps:
@@ -12,10 +14,12 @@ orbs:
       - node/install-packages
             
 workflows:
-  build-deploy:
+  build-test-deploy:
     jobs:
-      
-      - build
+      - test
+      - build:
+          requires:
+            - test
       - heroku/deploy-via-git:
           requires:
             - build
