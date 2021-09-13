@@ -12,7 +12,7 @@ orbs:
       - node/install-packages
             
 workflows:
-  build-test-deploy:
+  build-deploy:
     jobs:
       
       - build
