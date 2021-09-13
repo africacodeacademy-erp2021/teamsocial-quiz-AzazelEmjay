@@ -94,14 +94,51 @@ export default function Sports() {
   
   ];
   const [option, setOption] = useState();
-  const [questionLength, setQuestionLength] = useState(0);
+  const [questionLength, setQuestionLength] = useState(10);
+  const [random, setRandom] = useState(questions);
+
+  
+  function shuffle(array){
+    var number = array.length,
+    temporary,
+    index;
+    while(number> 0){
+      index = Math.floor(Math.random()* number);
+      number--;
+
+      temporary = array[number];
+      array[number] = array[index];
+      array[index] = temporary;
+    }
+    return array;
+  }
+
   function optionChange(event) {
     setOption(event.target.value);
     setQuestionLength(event.target.value);
 
+    if(questionLength === 5){
+      shuffle(questions);
+      questions.splice(5, 5);
+      let temporary = questions;
+      setRandom(temporary);
+
+    } else if (questionLength === 7){
+      shuffle(questions);
+      questions.splice(7, 3);
+      let temporary = questions;
+      setRandom(temporary);
+
+    }else{
+      shuffle(questions);
+      questions.splice(10, 10);
+      let temporary = questions;
+      setRandom(temporary);
+    }
+
     return questionLength;
   }
-  var randomIndex = Math.floor(Math.random()* questions.length);
+
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [showScore, setShowScore] = useState(false);
   const [score, setScore] = useState(0);
@@ -148,12 +185,12 @@ export default function Sports() {
                  
               </div>
               <div className="question-text">
-                {questions[randomIndex].questionText}
+                {random[currentQuestion].questionText}
               </div>
             </div>
 
             <div className="answer-section">
-              {questions[randomIndex].answerOptions.map((answerOptions) => (
+              {random[currentQuestion].answerOptions.map((answerOptions) => (
                 <button
                   onClick={() =>
                     handleAnswerButtonClick(answerOptions.isCorrect)

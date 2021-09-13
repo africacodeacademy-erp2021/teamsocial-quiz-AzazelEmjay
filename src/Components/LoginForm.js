@@ -29,6 +29,7 @@ const FormSignup = ({ submitForm }) => {
         type="text"
         name="username"
         placeholder="enter user name"
+       
         value={values.username}
         onChange={handleChange}
       />
