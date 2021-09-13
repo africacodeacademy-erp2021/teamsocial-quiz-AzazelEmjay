@@ -94,14 +94,14 @@ export default function Anime() {
     }
 
     const nextQuestions = currentQuestion + 1;
-
-    if (nextQuestions < questions.length) {
+    const length = 7;
+    if (nextQuestions < length) {
       setCurrentQuestion(nextQuestions);
     } else {
       setShowScore(true);
     }
   };
-  const data = JSON.stringify(localStorage.getItem("user"));
+  const data = JSON.stringify(localStorage.getItem("name"));
   const name = data.replace('"','');
   const username = name.replace('"','');
 
@@ -112,14 +112,14 @@ export default function Anime() {
       <div className="app">
         {showScore ? (
           <div className="score-section">
-            {data} You scored {score} out of {questions.length}
+            {username} You scored {score} out of 7
           </div>
         ) : (
           <>
             <div className="question-section">
               <div className="question-count">
                 <span>Question {currentQuestion + 1}</span>
-                {questions.length}
+           
               </div>
               <div className="question-text">
                 {questions[currentQuestion].questionText}
