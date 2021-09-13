@@ -173,6 +173,16 @@ export default function Movies() {
   const name = data.replace('"', "");
   const username = name.replace('"', "");
 
+  const win = questionLength/2;
+  let threshold = " ";
+
+  if(score >= win){
+threshold = "You passed the quiz";
+  }
+  else{
+  threshold = "You failed the quiz";
+  }
+
   return (
     <>
       <h1 className="header">Movies Quiz</h1>
@@ -181,7 +191,9 @@ export default function Movies() {
         {showScore ? (
           <div className="score-section">
             <p>
-              {username} You scored {score} out of {questionLength}{" "}
+              {username} You scored {score} out of {questionLength}{" "}<br/>
+              {threshold}
+ 
             </p>
             <br />
             <button>Restart Game</button>

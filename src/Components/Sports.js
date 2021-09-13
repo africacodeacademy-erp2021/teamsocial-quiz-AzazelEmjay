@@ -159,6 +159,16 @@ export default function Sports() {
   const name = data.replace('"','');
   const username = name.replace('"','');
 
+  const win = questionLength/2;
+  let threshold = " ";
+
+  if(score >= win){
+threshold = "You passed the quiz";
+  }
+  else{
+  threshold = "You failed the quiz";
+  }
+
   return (
     <>
       <h1 className="header">Sports Quiz</h1>
@@ -166,7 +176,8 @@ export default function Sports() {
       <div className="app">
         {showScore ? (
           <div className="score-section">
-           <p> {username} You scored {score} out of {questionLength}</p>
+           <p> {username} You scored {score} out of {questionLength}</p><br/>
+           {threshold}
           </div>
         ) : (
           <>
