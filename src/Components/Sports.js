@@ -48,7 +48,97 @@ export default function Sports() {
         { answerText: "4", isCorrect: true },
       ],
     },
+    {
+      questionText: "Who had started the International Women’s Boxing Hall of Fame?",
+      answerOptions: [
+        { answerText: "Terri Moss", isCorrect: false },
+        { answerText: "Sue TL Fox", isCorrect: true },
+        { answerText: "Claressa Shields", isCorrect: false },
+        { answerText: "Barbara Buttrick", isCorrect:false },
+      ],
+    },
+    {
+      questionText: "Which among the following is known as 'Bible of Cricket'?",
+      answerOptions: [
+        { answerText: "All Out Cricket", isCorrect: false },
+        { answerText: "Cricinfo Magazine", isCorrect: false },
+        { answerText: "Wisden", isCorrect: true },
+        { answerText: "The Guide to Cricketers", isCorrect:false },
+      ],
+    },
+    {
+      questionText: "Which country has won the maximum number of medals in the all time history of Commonwealth Games?",
+      answerOptions: [
+        { answerText: "Australia", isCorrect: true  },
+        { answerText: "England", isCorrect: false },
+        { answerText: "India", isCorrect: false },
+        { answerText: "Canada", isCorrect: false},
+      ],
+    },
+    {
+      questionText: "There are 30 balls in the game of snooker.",
+      answerOptions: [
+       
+        { answerText: "True", isCorrect: false },
+        { answerText: "False", isCorrect: true },
+      ],
+    },
+    {
+      questionText: "There has never been a woman chess master.",
+      answerOptions: [
+       
+        { answerText: "True", isCorrect: false },
+        { answerText: "False", isCorrect: true },
+      ],
+    },
+  
   ];
+  const [option, setOption] = useState();
+  const [questionLength, setQuestionLength] = useState(10);
+  const [random, setRandom] = useState(questions);
+
+  
+  function shuffle(array){
+    var number = array.length,
+    temporary,
+    index;
+    while(number> 0){
+      index = Math.floor(Math.random()* number);
+      number--;
+
+      temporary = array[number];
+      array[number] = array[index];
+      array[index] = temporary;
+    }
+    return array;
+  }
+
+  function optionChange(event) {
+    setOption(event.target.value);
+    setQuestionLength(event.target.value);
+
+    if(questionLength === 5){
+      shuffle(questions);
+      questions.splice(5, 5);
+      let temporary = questions;
+      setRandom(temporary);
+
+    } else if (questionLength === 7){
+      shuffle(questions);
+      questions.splice(7, 3);
+      let temporary = questions;
+      setRandom(temporary);
+
+    }else{
+      shuffle(questions);
+      questions.splice(10, 10);
+      let temporary = questions;
+      setRandom(temporary);
+    }
+
+    return questionLength;
+  }
+
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [showScore, setShowScore] = useState(false);
   const [score, setScore] = useState(0);
@@ -59,39 +149,59 @@ export default function Sports() {
 
     const nextQuestions = currentQuestion + 1;
 
-    if (nextQuestions < questions.length) {
+    if (nextQuestions < questionLength) {
       setCurrentQuestion(nextQuestions);
     } else {
       setShowScore(true);
     }
   };
-  const data = JSON.stringify(localStorage.getItem("user"));
+  const data = JSON.stringify(localStorage.getItem("name"));
   const name = data.replace('"','');
   const username = name.replace('"','');
+
+  const win = questionLength/2;
+  let threshold = " ";
+
+  if(score >= win){
+threshold = "You passed the quiz";
+  }
+  else{
+  threshold = "You failed the quiz";
+  }
 
   return (
     <>
       <h1 className="header">Sports Quiz</h1>
-      <p>Player Name: {username}</p>
+      
       <div className="app">
         {showScore ? (
           <div className="score-section">
-            {username} You scored {score} out of {questions.length}
+           <p> {username} You scored {score} out of {questionLength}</p><br/>
+           {threshold}
           </div>
         ) : (
           <>
+          <div className="answers">
+              <p>Select the number of questions for Your game</p>
+              <select name="option" onChange={optionChange}>
+                <option value="10">All questions</option>
+                <option value="5">5</option>
+                <option value="7">7</option>
+              </select>
+            </div>
+          <p>Player Name: {username}</p>
             <div className="question-section">
               <div className="question-count">
                 <span>Question {currentQuestion + 1}</span>
-                {questions.length}
+                 
               </div>
               <div className="question-text">
-                {questions[currentQuestion].questionText}
+                {random[currentQuestion].questionText}
               </div>
             </div>
 
             <div className="answer-section">
-              {questions[currentQuestion].answerOptions.map((answerOptions) => (
+              {random[currentQuestion].answerOptions.map((answerOptions) => (
                 <button
                   onClick={() =>
                     handleAnswerButtonClick(answerOptions.isCorrect)
@@ -99,7 +209,10 @@ export default function Sports() {
                 >
                   {answerOptions.answerText}
                 </button>
+  
               ))}
+              <br/>
+              Your score is {score}
             </div>
           </>
         )}

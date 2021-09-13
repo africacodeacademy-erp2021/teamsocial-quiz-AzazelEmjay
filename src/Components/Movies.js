@@ -12,6 +12,7 @@ export default function Movies() {
         { answerText: "Nick Fury", isCorrect: false },
       ],
     },
+
     {
       questionText: "Who was the true villain in Zack Snyder's Justice League?",
       answerOptions: [
@@ -53,10 +54,107 @@ export default function Movies() {
         { answerText: "Dr. Strange: Multitude Of Madness", isCorrect: true },
       ],
     },
+
+    {
+      questionText: "Who plays Peter Quill in Guardians Of The Galaxy?",
+      answerOptions: [
+        { answerText: "Dave Bautista", isCorrect: false },
+        { answerText: "Chris Evans", isCorrect: false },
+        { answerText: "Chris Hemsworth", isCorrect: false },
+        { answerText: "Chris Pratt", isCorrect: true },
+      ],
+    },
+
+    {
+      questionText:
+        "Who is the actor behind Groot from the guardians of the galaxy?",
+      answerOptions: [
+        { answerText: "Sylvester Stallone", isCorrect: false },
+        { answerText: "Dwayne Johnson", isCorrect: false },
+        { answerText: "Morgan Freeman", isCorrect: false },
+        { answerText: "Vin Diesel", isCorrect: true },
+      ],
+    },
+    {
+      questionText: "Red Skull Guards the soul stone in Avengers Infinity War",
+      answerOptions: [
+        { answerText: "True", isCorrect: true },
+        { answerText: "False", isCorrect: false },
+      ],
+    },
+    {
+      questionText:
+        "Tony Stark said the line, 'You're not the only one cursed with knowledge'",
+      answerOptions: [
+        { answerText: "True", isCorrect: false },
+        { answerText: "False", isCorrect: true },
+      ],
+    },
+
+    {
+      questionText:
+        "Tom Holland's first appearance in Marvel as spiderman was in Captain America Civil War ",
+      answerOptions: [
+        { answerText: "True", isCorrect: true },
+        { answerText: "False", isCorrect: false },
+      ],
+    },
   ];
+
+
+
+  const [option, setOption] = useState();
+  const [questionLength, setQuestionLength] = useState(10);
+  const [random, setRandom] = useState(questions);
+
+  
+  function shuffle(array){
+    var number = array.length,
+    temporary,
+    index;
+    while(number> 0){
+      index = Math.floor(Math.random()* number);
+      number--;
+
+      temporary = array[number];
+      array[number] = array[index];
+      array[index] = temporary;
+    }
+    return array;
+  }
+
+  function optionChange(event) {
+    setOption(event.target.value);
+    setQuestionLength(event.target.value);
+
+    if(questionLength === 5){
+      shuffle(questions);
+      questions.splice(5, 5);
+      let temporary = questions;
+      setRandom(temporary);
+
+    } else if (questionLength === 7){
+      shuffle(questions);
+      questions.splice(7, 3);
+      let temporary = questions;
+      setRandom(temporary);
+
+    }else{
+      shuffle(questions);
+      questions.splice(10, 10);
+      let temporary = questions;
+      setRandom(temporary);
+    }
+
+    return questionLength;
+  }
+
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [showScore, setShowScore] = useState(false);
   const [score, setScore] = useState(0);
+
+
+
   const handleAnswerButtonClick = (isCorrect) => {
     if (isCorrect === true) {
       setScore(score + 1);
@@ -64,39 +162,67 @@ export default function Movies() {
 
     const nextQuestions = currentQuestion + 1;
 
-    if (nextQuestions < questions.length) {
+    if (nextQuestions < questionLength) {
       setCurrentQuestion(nextQuestions);
     } else {
       setShowScore(true);
     }
   };
-  const data = JSON.stringify(localStorage.getItem("user"));
-  const name = data.replace('"','');
-  const username = name.replace('"','');
+  
+  const data = JSON.stringify(localStorage.getItem("name"));
+  const name = data.replace('"', "");
+  const username = name.replace('"', "");
+
+  const win = questionLength/2;
+  let threshold = " ";
+
+  if(score >= win){
+threshold = "You passed the quiz";
+  }
+  else{
+  threshold = "You failed the quiz";
+  }
 
   return (
     <>
       <h1 className="header">Movies Quiz</h1>
-      <p>Player Name: {username}</p>
+
       <div className="app">
         {showScore ? (
           <div className="score-section">
-            {data} You scored {score} out of {questions.length}
+            <p>
+              {username} You scored {score} out of {questionLength}{" "}<br/>
+              {threshold}
+ 
+            </p>
+            <br />
+            <button>Restart Game</button>
+            <br />
+            <button>Choose a different Category</button>
           </div>
         ) : (
           <>
+            <div className="answers">
+              <p>Select the number of questions for Your game</p>
+              <select name="option" onChange={optionChange}>
+                <option value="10">All questions</option>
+                <option value="5" >5</option>
+                <option value="7" >7</option>
+              </select>
+            </div>
+            <p>Player Name: {username}</p>
             <div className="question-section">
               <div className="question-count">
                 <span>Question {currentQuestion + 1}</span>
-                {questions.length}
               </div>
               <div className="question-text">
-                {questions[currentQuestion].questionText}
+                {random[currentQuestion].questionText}
+                
               </div>
             </div>
 
             <div className="answer-section">
-              {questions[currentQuestion].answerOptions.map((answerOptions) => (
+              {random[currentQuestion].answerOptions.map((answerOptions) => (
                 <button
                   onClick={() =>
                     handleAnswerButtonClick(answerOptions.isCorrect)
@@ -105,6 +231,8 @@ export default function Movies() {
                   {answerOptions.answerText}
                 </button>
               ))}
+              <br />
+              Your score is {score}
             </div>
           </>
         )}

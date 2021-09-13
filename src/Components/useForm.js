@@ -9,6 +9,7 @@ const useForm = (callback, validate) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+
     setValues({
       ...values,
       [name]: value,
@@ -22,12 +23,17 @@ const useForm = (callback, validate) => {
     setIsSubmitting(true);
   };
 
-  useEffect(() => {
-    if (Object.keys(errors).length === 0 && isSubmitting) {
-      callback();
-    }
-  }, [callback, errors, isSubmitting]);
-  return { handleChange, values, handleSubmit, errors };
+  useEffect(
+    () => {
+      if (Object.keys(errors).length === 0 && isSubmitting) {
+        callback();
+      }
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [errors]
+  );
+
+  return { handleChange, handleSubmit, values, errors };
 };
 
 export default useForm;
