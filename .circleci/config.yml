@@ -3,12 +3,37 @@ version: 2.1
 
 orbs:
   node: circleci/node@4.1
-
+  heroku: circleci/heroku@1.0.1
+  
+jobs:
+  test:
+      executor: node/default
+      steps:
+        - checkout
+        - run:
+            name: install dependencies
+            command: npm install
+        - run:
+            name: tests
+            command: npm run test  
+              
+  build:
+    executor: node/default
+    steps:
+      - checkout
+      - node/install-packages
+            
 workflows:
-  sample:
+  build-test-deploy:
     jobs:
-      - node/test:
-          version: '15.1'
-          # This is the node version to use for the `cimg/node` tag
-          # Relevant tags can be found on the CircleCI Developer Hub
-          # https://circleci.com/developer/images/image/cimg/node
+      - test
+      - build:
+          requires:
+            - test
+      - heroku/deploy-via-git:
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - main          
