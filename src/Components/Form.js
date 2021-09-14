@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import FormSignup from './LoginForm';
 import Welcome from './Categories';
 
-const Form = () => {
+export default function Form () {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   function submitForm() {
@@ -20,4 +20,4 @@ const Form = () => {
   );
 };
 
-export default Form;
+
