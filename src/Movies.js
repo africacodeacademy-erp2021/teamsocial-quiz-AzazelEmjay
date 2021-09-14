@@ -74,6 +74,10 @@ export default function Movies() {
   const name = data.replace('"','');
   const username = name.replace('"','');
 
+  const scrape = JSON.stringify(localStorage.getItem("image"));
+  const imageName = scrape.replace('"','');
+  const scrapedImage = imageName.replace('"','');
+
   return (
     <>
       <h1 className="header">Movies Quiz</h1>
@@ -82,6 +86,8 @@ export default function Movies() {
         {showScore ? (
           <div className="score-section">
             {username} You scored {score} out of {questions.length}
+            <img src = {scrapedImage} alt="Meme" />
+
           </div>
         ) : (
           <>
