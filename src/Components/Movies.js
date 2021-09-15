@@ -101,8 +101,6 @@ export default function Movies() {
     },
   ];
 
-
-
   const [option, setOption] = useState();
   const [questionLength, setQuestionLength] = useState(10);
   const [random, setRandom] = useState(questions);
@@ -173,14 +171,26 @@ export default function Movies() {
   const name = data.replace('"', "");
   const username = name.replace('"', "");
 
+  const image = JSON.stringify(localStorage.getItem("image"));
+  const Imagename = image.replace('"', "");
+  const imageName= Imagename.replace('"', "");
+
+  const loseImage = JSON.stringify(localStorage.getItem("lose"));
+  const loserImage= loseImage.replace('"', "");
+  const imageLoser= loserImage.replace('"', "");
+
   const win = questionLength/2;
   let threshold = " ";
 
+  let Img="";
   if(score >= win){
 threshold = "You passed the quiz";
+  Img = imageName;
   }
   else{
   threshold = "You failed the quiz";
+  Img = imageLoser;
+  
   }
 
   return (
@@ -193,6 +203,7 @@ threshold = "You passed the quiz";
             <p>
               {username} You scored {score} out of {questionLength}{" "}<br/>
               {threshold}
+              <img src={Img} alt="threshold"/>
  
             </p>
             <br />
