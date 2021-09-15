@@ -202,8 +202,8 @@ threshold = "You passed the quiz";
           <div className="score-section">
             <p>
               {username} You scored {score} out of {questionLength}{" "}<br/>
-              {threshold}
-              <img src={Img} alt="threshold"/>
+              {threshold} <br/>
+              <img src={Img} alt="results"/>
  
             </p>
             <br />
