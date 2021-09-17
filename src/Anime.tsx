@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function Anime(props:any) {
+export default function Anime(props: any) {
   const questions = [
     {
       questionText: "Who is the main character of Bleach?",
@@ -96,7 +96,7 @@ export default function Anime(props:any) {
   ];
 
   const [option, setOption] = useState();
-  const [questionLength, setQuestionLength] = useState(5);
+  const [questionLength, setQuestionLength] = useState(10);
   const [random, setRandom] = useState(questions);
 
 
@@ -192,37 +192,38 @@ export default function Anime(props:any) {
           </div>
         ) : (
           <>
-          <div className = "Border">
-            <div className="answers">
-              <p>Select the number of questions for Your game</p>
-              <select name="option" onChange={optionChange}>
-                <option value="5">5</option>
-                <option value="7">7</option>
-              </select>
-            </div>
-            <p>Player Name: {username}</p>
-            <div className="question-section">
-              <div className="question-count">
-                <span>Question {currentQuestion + 1}</span>
+            <div className="Border">
+              <div className="answers">
+                <p>Select the number of questions for Your game</p>
+                <select name="option" onChange={optionChange}>
+                <option value="10">All questions</option>
+                <option value="5" >5</option>
+                <option value="7" >7</option>
+                </select>
               </div>
-              <div className="question-text">
-                {random[currentQuestion].questionText}
+              <p>Player Name: {username}</p>
+              <div className="question-section">
+                <div className="question-count">
+                  <span>Question {currentQuestion + 1}</span>
+                </div>
+                <div className="question-text">
+                  {random[currentQuestion].questionText}
+                </div>
               </div>
-            </div>
 
-            <div className="answer-section">
-              {random[currentQuestion].answerOptions.map((answerOptions) => (
-                <button
-                  onClick={() =>
-                    handleAnswerButtonClick(answerOptions.isCorrect)
-                  }
-                >
-                  {answerOptions.answerText}
-                </button>
-              ))}
-              <br />
-              Your score is {score}
-            </div>
+              <div className="answer-section">
+                {random[currentQuestion].answerOptions.map((answerOptions) => (
+                  <button
+                    onClick={() =>
+                      handleAnswerButtonClick(answerOptions.isCorrect)
+                    }
+                  >
+                    {answerOptions.answerText}
+                  </button>
+                ))}
+                <br />
+                Your score is {score}
+              </div>
             </div>
           </>
         )}

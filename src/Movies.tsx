@@ -102,7 +102,7 @@ export default function Movies(props: { storage: string }) {
   ];
 
   const [option, setOption] = useState();
-  const [questionLength, setQuestionLength] = useState(5);
+  const [questionLength, setQuestionLength] = useState(10);
   const [random, setRandom] = useState(questions);
 
   function shuffle(array: any[]) {
@@ -198,8 +198,9 @@ export default function Movies(props: { storage: string }) {
             <div className="answers">
               <p>Select the number of questions for Your game</p>
               <select name="option" onChange={optionChange}>
-                <option value="5">5</option>
-                <option value="7">7</option>
+              <option value="10">All questions</option>
+                <option value="5" >5</option>
+                <option value="7" >7</option>
               </select>
             </div>
             <p>Player Name: {username}</p>
