@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Loser from "./Lose/images/104-1046176_smiling-emoji-clipart.png";
+import Winner from "./winner/images/Emoji-1.jpg"
 
 export default function Sports(props:any) {
   const questions = [
@@ -161,12 +163,15 @@ export default function Sports(props:any) {
 
   const win = questionLength/2;
   let threshold = " ";
+  let image = "";
 
   if(score >= win){
 threshold = "You passed the quiz";
+image = Loser;
   }
   else{
   threshold = "You failed the quiz";
+  image = Winner;
   }
 
   return (
@@ -179,7 +184,7 @@ threshold = "You passed the quiz";
             <p>
               {username} You scored {score} out of {questionLength} <br />
               {threshold} <br />
-              <img src={props.storage} alt="results" />
+              <img src={image} alt="results" />
             </p>
             <br />
             <button>Restart Game</button>

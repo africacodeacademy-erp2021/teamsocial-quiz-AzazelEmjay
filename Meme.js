@@ -2,7 +2,7 @@ const winner = require('website-scraper');
 const Lose = require('website-scraper');
 winner({
    urls: ['https://www.pinclipart.com/maxpin/TobwwR/'],
-   directory: 'emoji_happy',
+   directory: './src/Lose',
    sources:[
              {selector: 'img', attr: 'src', id: 'img01' }
    ]
@@ -10,7 +10,7 @@ winner({
 
 Lose({
     urls: ['https://www.licensingcorner.com/2017/04/27/jack-licensing-programme-emoji-movie/'],
-    directory: 'emoji_sad',
+    directory: './src/winner',
     sources:[
               {selector: 'img',  attr: 'src' }
     ]
