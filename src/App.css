@@ -1,9 +1,31 @@
+.App {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.nav 
+{
+  list-style-type: none;
+  width: 500px;
+  align-items: center;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+a 
+{
+  text-decoration: none;
+  color: inherit;
+}
+
 body {
-  background-color: #990bbd;
+  background-color: rgb(5, 5, 5);
   font-size: medium;
 
 }
 h1{
+  background-color: rgb(65, 80, 100);
   font-size: 40px;
 }
 
@@ -28,6 +50,7 @@ p{
 
 form {
 font-size: 20px;
+background-color: rgb(108, 105, 110);
 
 }
 .header{
@@ -44,4 +67,19 @@ justify-content: space-between;
 
 button{
   font-size: 20px;
+  background-color: rgb(65, 80, 100);
+}
+
+.categories{
+  font-size: 20px;
+background-color: rgb(108, 105, 110);
+}
+.Border {
+  font-size: 20px;
+  background-color: rgb(108, 105, 110);
+}
+
+.score-section{
+  font-size: 20px;
+  background-color: rgb(108, 105, 110);
 }

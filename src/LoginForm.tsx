@@ -2,12 +2,14 @@ import React from "react";
 import validate from "./ValidateInfo";
 import useForm from "./useForm";
 
-const FormSignup = ({ submitForm }) => {
-  const { handleChange, values, handleSubmit, errors } = useForm(
+const FormSignup = ({ submitForm }: {submitForm:any}) => {
+  const { handleChange, values, handleSubmit } = useForm(
     submitForm,
     validate
   );
-  const onsubmit = (event) => {
+
+  
+  const onsubmit = (event: { preventDefault: () => void; }) => {
     event.preventDefault();
   };
 
@@ -31,7 +33,7 @@ const FormSignup = ({ submitForm }) => {
           value={values.username}
           onChange={handleChange}
         />
-        {errors.username && <p>{errors.username}</p>}
+         <p>Username should be between 3 and 20 characters long</p>
         <button type="submit" onClick={click} onSubmit={onsubmit}>
           Start Game
         </button>

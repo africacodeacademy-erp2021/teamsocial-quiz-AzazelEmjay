@@ -5,6 +5,17 @@ orbs:
   heroku: circleci/heroku@1.0.1
 
 jobs:
+  test:
+      executor: node/default
+      steps:
+        - checkout
+        - run:
+            name: install dependencies
+            command: npm install
+        - run:
+            name: tests
+            command: npm run test 
+
   build:
     executor: node/default
     steps:
@@ -14,7 +25,10 @@ jobs:
 workflows:
   build-test-deploy:
     jobs:
-      - build
+      - test
+      - build:
+          requires:
+            - test
       - heroku/deploy-via-git:
           requires:
             - build
@@ -22,3 +36,5 @@ workflows:
             branches:
               only:
                 - main
+
+                

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function Anime() {
+export default function Anime(props:any) {
   const questions = [
     {
       questionText: "Who is the main character of Bleach?",
@@ -84,50 +84,134 @@ export default function Anime() {
         { answerText: "Grey Fullbuster", isCorrect: false },
       ],
     },
+    {
+      questionText: "Tensa Zangetsu is the name of Ichigo's Bankai",
+      answerOptions: [
+        { answerText: "True", isCorrect: true },
+        { answerText: "False", isCorrect: false },
+
+      ],
+    },
+
   ];
+
+  const [option, setOption] = useState();
+  const [questionLength, setQuestionLength] = useState(5);
+  const [random, setRandom] = useState(questions);
+
+
+  function shuffle(array: any) {
+    var number = array.length,
+      temporary,
+      index;
+    while (number > 0) {
+      index = Math.floor(Math.random() * number);
+      number--;
+
+      temporary = array[number];
+      array[number] = array[index];
+      array[index] = temporary;
+    }
+    return array;
+  }
+
+  function optionChange(event: any) {
+    setOption(event.target.value);
+    setQuestionLength(event.target.value);
+
+    if (questionLength === 5) {
+      shuffle(questions);
+      questions.splice(5, 5);
+      let temporary = questions;
+      setRandom(temporary);
+
+    } else if (questionLength === 7) {
+      shuffle(questions);
+      questions.splice(7, 3);
+      let temporary = questions;
+      setRandom(temporary);
+
+    } else {
+      shuffle(questions);
+      questions.splice(10, 10);
+      let temporary = questions;
+      setRandom(temporary);
+    }
+
+    return questionLength;
+  }
+
+
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [showScore, setShowScore] = useState(false);
   const [score, setScore] = useState(0);
-  const handleAnswerButtonClick = (isCorrect) => {
+  const handleAnswerButtonClick = (isCorrect: boolean) => {
     if (isCorrect === true) {
       setScore(score + 1);
     }
 
     const nextQuestions = currentQuestion + 1;
-    const length = 7;
-    if (nextQuestions < length) {
+
+    if (nextQuestions < questionLength) {
       setCurrentQuestion(nextQuestions);
     } else {
       setShowScore(true);
     }
   };
   const data = JSON.stringify(localStorage.getItem("name"));
-  const name = data.replace('"','');
-  const username = name.replace('"','');
+  const name = data.replace('"', '');
+  const username = name.replace('"', '');
+
+
+  const win = questionLength / 2;
+  let threshold = " ";
+
+  if (score >= win) {
+    threshold = "You passed the quiz";
+  }
+  else {
+    threshold = "You failed the quiz";
+  }
 
   return (
     <>
       <h1 className="header">Anime Quiz</h1>
-      <p>Player Name: {username}</p>
+
       <div className="app">
         {showScore ? (
           <div className="score-section">
-            {username} You scored {score} out of 7
+            <p>
+              {username} You scored {score} out of {questionLength} <br />
+              {threshold} <br />
+              <img src={props.storage} alt="results" />
+            </p>
+            <br />
+            <button>Restart Game</button>
+            <br />
+            <button>Choose a different Category</button>
           </div>
         ) : (
           <>
+          <div className = "Border">
+            <div className="answers">
+              <p>Select the number of questions for Your game</p>
+              <select name="option" onChange={optionChange}>
+                <option value="5">5</option>
+                <option value="7">7</option>
+              </select>
+            </div>
+            <p>Player Name: {username}</p>
             <div className="question-section">
               <div className="question-count">
                 <span>Question {currentQuestion + 1}</span>
-           
               </div>
               <div className="question-text">
-                {questions[currentQuestion].questionText}
+                {random[currentQuestion].questionText}
               </div>
             </div>
 
             <div className="answer-section">
-              {questions[currentQuestion].answerOptions.map((answerOptions) => (
+              {random[currentQuestion].answerOptions.map((answerOptions) => (
                 <button
                   onClick={() =>
                     handleAnswerButtonClick(answerOptions.isCorrect)
@@ -136,6 +220,9 @@ export default function Anime() {
                   {answerOptions.answerText}
                 </button>
               ))}
+              <br />
+              Your score is {score}
+            </div>
             </div>
           </>
         )}

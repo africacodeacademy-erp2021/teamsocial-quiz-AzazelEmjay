@@ -1,17 +1,14 @@
 import React, { useState } from "react";
 import FormSignup from "./LoginForm";
-import Welcome from "./Categories";  
+import Welcome from "./Categories";
 
-const Form = () => {
+export default function Form() {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   function submitForm() {
     setIsSubmitted(true);
   }
-  
   return (
     <>{!isSubmitted ? <FormSignup submitForm={submitForm} /> : <Welcome />}</>
   );
-};
-
-export default Form;
+}
