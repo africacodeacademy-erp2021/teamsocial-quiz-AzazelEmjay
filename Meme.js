@@ -1,19 +1,17 @@
-const puppeteer = require ('puppeteer');
+const winner = require('website-scraper');
+const Lose = require('website-scraper');
+winner({
+   urls: ['https://www.pinclipart.com/maxpin/TobwwR/'],
+   directory: 'emoji_happy',
+   sources:[
+             {selector: 'img', attr: 'src', id: 'img01' }
+   ]
+});
 
-async function scrapeProduct(url){
-    const browser = await puppeteer.launch();
-    const page = await browser.newPage();
-    await page.goto(url);
-
-    const [element] = page.$x('//*[@id="react-target"]/div/div[7]/div[2]/div[1]/a[14]/div/picture/img');
-    const src = await element.getProperty('src');
-    const srcTxt = await src.jsonValue();
-
-    console.log(srcTxt);
-
-    localStorage.setItem("image", srcTxt);
-    browser.close();
-
-}
-
-scrapeProduct('https://giphy.com/explore/celebration');
+Lose({
+    urls: ['https://www.licensingcorner.com/2017/04/27/jack-licensing-programme-emoji-movie/'],
+    directory: 'emoji_sad',
+    sources:[
+              {selector: 'img',  attr: 'src' }
+    ]
+ });
